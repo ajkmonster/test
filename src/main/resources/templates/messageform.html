@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th ="http://www.thymeleaf.org">
+<head th:replace="base :: headstuff"></head>
+<body>
+<nav th:replace="base :: navbar"></nav>
+<div class="container">
+    <div class="jumbotron" style="margin-top: 20px; padding-top: 2rem">
+        <div class="col-sm-6">
+            <h1 class="display-4">Submit a Message!</h1>
+        </div>
+        <form action="#" th:action="@{/processmessage}" th:object="${message}" method="post" enctype="multipart/form-data">
+            <input type="hidden" th:field="*{id}" />
+            <div class="form-group">
+                <div class="col-sm-6">
+                    <label for="message">Message</label>
+                    <input type="text" class="form-control" id="message" th:field="*{content}" placeholder="Hello!"/>
+                    <span th:if="${#fields.hasErrors('content')}" th:errors="*{content}"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-3">
+                    <label for="date">Date Posted</label>
+                    <input type="text" class="form-control" id="date" placeholder="01/01/2000" th:field="*{postedDate}"/>
+                    <span th:if="${#fields.hasErrors('postedDate')}" th:errors="*{postedDate}"></span>
+                </div>
+            </div>
+            <div class="col-sm-2">
+                <input type="submit" class="btn btn-dark btn-large"value="Submit" />
+            </div>
+        </form>
+    </div>
+</div>
+<footer th:replace="base :: footer"></footer>
+</body>
+<th:block th:replace="base :: jslinks"></th:block>
+</html>

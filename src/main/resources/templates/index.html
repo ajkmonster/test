@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" , xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head th:replace="base :: headstuff"></head>
+<body>
+<nav th:replace="base :: navbar"></nav>
+<br/>
+
+<div class="container col-md-8">
+    <div th:if="${messages.size() == 0}">
+        <h1>There's nothing here.</h1>
+        <p style="text-align: center;">Try a new search or return <a href="/">home</a></p>
+    </div>
+    <div th:each="message : ${messages}">
+        <div class="card card-list mb-3 animated fadeInUp">
+            <div class="card-horizontal">
+                <div class="card-header col-md-3">
+                    <strong>[[${message.user.firstName}]] [[${message.user.lastName}]]</strong>
+                </div>
+                <div class="col-md-4">
+                    <div class="card-body">
+                        <p class="card-text" th:text="${message.content}"></p>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card-body">
+                        <p class="card-text"><small th:text="${message.postedDate}" class="text-muted"></small></p>
+                    </div>
+                </div>
+                <div sec:authorize="hasAuthority('USER')" class="col-md-2 img-square-wrapper img-download">
+                    <a data-toggle="collapse" th:href="'#collapse_'+${message.id}" role="button"
+                       aria-expanded="false"
+                       aria-controls="collapseExample">
+                        <span style="font-size:1.25em; color: #cb52bf;"><i class="fas fa-cog"></i></span>
+                    </a>
+                    <div class="collapse" th:id="'collapse_'+${message.id}">
+                        <div class="card card-body card-menu card-body-collapse card-horizontal"
+                             style="flex-direction: row">
+                            <a class="nav-link" role="button" th:href="@{/update/{id}(id=${message.id})}"><i
+                                    class="fas fa-edit"></i></a>
+                            <a class="nav-link" role="button" th:href="@{/delete/{id}(id=${message.id})}"><i
+                                    class="fas fa-trash-alt"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<footer th:replace="base :: footer"></footer>
+</body>
+<th:block th:replace="base :: jslinks"></th:block>
+</html>

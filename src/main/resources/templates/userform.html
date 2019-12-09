@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head th:replace="base :: headstuff"></head>
+<body>
+<nav th:replace="base :: navbar"></nav>
+<div class="container">
+    <div class="jumbotron col-md-6 mx-auto" style="margin-top: 20px; padding-top: 2rem">
+        <div class="mx-auto">
+            <h1 class="display-4">Create an Account</h1>
+        </div>
+        <form class="form-signin mx-auto" action="#" th:action="@{/processuser}" th:object="${user}" method="post"
+              enctype="multipart/form-data">
+            <input type="hidden" th:field="*{id}"/>
+            <div class="form-label-group">
+                <input type="text" class="form-control" id="firstname" name="firstname" th:field="*{firstName}"
+                       placeholder="First Name" required autofocus/>
+                <label for="firstname">First Name</label>
+            </div>
+            <div class="form-label-group">
+                <input type="text" class="form-control" id="lastname" name="lastname" th:field="*{lastName}"
+                       placeholder="Last Name" required autofocus/>
+                <label for="lastname">Last Name</label>
+            </div>
+            <div class="form-label-group">
+                <input type="email" class="form-control" id="email" name="email" th:field="*{email}" placeholder="Email"
+                       required autofocus/>
+                <label for="email">Email</label>
+            </div>
+            <div class="form-label-group">
+                <input type="text" class="form-control" id="username" name="username" th:field="*{username}"
+                       placeholder="User Name" required autofocus/>
+                <label for="username">Username</label>
+            </div>
+            <input type="hidden" th:field="*{password}"/>
+            <div th:if="${user.password != null}" class="form-label-group">
+                <input type="password" class="form-control" id="password1" name="password1" th:field="*{password}"
+                       placeholder="Password"/>
+                <label for="password1">Password</label>
+            </div>
+            <div th:if="${user.password == null}" class="form-label-group">
+                <input type="password" class="form-control" id="password2" name="password2" th:field="*{password}"
+                       placeholder="Password" required autofocus/>
+                <label for="password2">Password</label>
+            </div>
+            <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Submit</button>
+        </form>
+    </div>
+</div>
+<footer th:replace="base :: footer"></footer>
+</body>
+<th:block th:replace="base :: jslinks"></th:block>
+</html>
