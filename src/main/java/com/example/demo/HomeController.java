@@ -6,10 +6,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.security.Principal;
@@ -83,4 +80,16 @@ public class HomeController {
         userRepository.save(user);
         return "redirect:/";
     }
+
+    @RequestMapping("/updateMessage/{id}")
+    public String updateEmp(Model model, @PathVariable("id") long id){
+        model.addAttribute("message", messageRepository.findById(id).get());
+        return "messageform";
+    }
+    @RequestMapping("/deleteMessage/{id}")
+    public String delEmp(@PathVariable("id") long id){
+        messageRepository.deleteById(id);
+        return "redirect:/";
+    }
+
 }

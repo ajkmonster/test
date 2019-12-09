@@ -26,25 +26,27 @@ public class DataLoader implements CommandLineRunner {
 
     @Override
     public void run(String... strings) throws Exception {
-        roleRepository.save(new Role("USER"));
-        roleRepository.save(new Role("ADMIN"));
+        if(roleRepository.count() == 0) {
+            roleRepository.save(new Role("USER"));
+            roleRepository.save(new Role("ADMIN"));
 
-        User user = new User("yusuf@gmail.com", "password","Yusuf","Reyazuddin","yusuf",true);
-        userService.saveUser(user);
+            User user = new User("yusuf@gmail.com", "password", "Yusuf", "Reyazuddin", "yusuf", true);
+            userService.saveUser(user);
 
-        Set<Message> messages = new HashSet<>();
+            Set<Message> messages = new HashSet<>();
 
-        Message message = new Message("I am so tired","12/09/2019");
-        message.setUser(user);
-        messageRepository.save(message);
-        messages.add(message);
+            Message message = new Message("I am so tired", "12/09/2019");
+            message.setUser(user);
+            messageRepository.save(message);
+            messages.add(message);
 
-        message = new Message("Coding is hard and fun", "12/06/2019");
-        message.setUser(user);
-        messageRepository.save(message);
-        messages.add(message);
+            message = new Message("Coding is hard and fun", "12/06/2019");
+            message.setUser(user);
+            messageRepository.save(message);
+            messages.add(message);
 
-        user.setMessages(messages);
-        userService.saveUser(user);
+            user.setMessages(messages);
+            userService.saveUser(user);
+        }
     }
 }

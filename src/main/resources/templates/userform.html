@@ -31,17 +31,12 @@
                        placeholder="User Name" required autofocus/>
                 <label for="username">Username</label>
             </div>
-            <input type="hidden" th:field="*{password}"/>
-            <div th:if="${user.password != null}" class="form-label-group">
+            <div class="form-label-group">
                 <input type="password" class="form-control" id="password1" name="password1" th:field="*{password}"
                        placeholder="Password"/>
                 <label for="password1">Password</label>
             </div>
-            <div th:if="${user.password == null}" class="form-label-group">
-                <input type="password" class="form-control" id="password2" name="password2" th:field="*{password}"
-                       placeholder="Password" required autofocus/>
-                <label for="password2">Password</label>
-            </div>
+
             <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Submit</button>
         </form>
     </div>

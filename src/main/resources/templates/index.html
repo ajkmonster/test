@@ -35,9 +35,9 @@
                     <div class="collapse" th:id="'collapse_'+${message.id}">
                         <div class="card card-body card-menu card-body-collapse card-horizontal"
                              style="flex-direction: row">
-                            <a class="nav-link" role="button" th:href="@{/update/{id}(id=${message.id})}"><i
+                            <a class="nav-link" role="button" th:href="@{/updateMessage/{id}(id=${message.id})}"><i
                                     class="fas fa-edit"></i></a>
-                            <a class="nav-link" role="button" th:href="@{/delete/{id}(id=${message.id})}"><i
+                            <a class="nav-link" role="button" th:href="@{/deleteMessage/{id}(id=${message.id})}"><i
                                     class="fas fa-trash-alt"></i></a>
                         </div>
                     </div>
