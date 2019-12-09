@@ -26,7 +26,8 @@
                         <p class="card-text"><small th:text="${message.postedDate}" class="text-muted"></small></p>
                     </div>
                 </div>
-                <div sec:authorize="hasAuthority('USER')" class="col-md-2 img-square-wrapper img-download">
+                <div sec:authorize="hasAuthority('USER')" th:if="${message.user.username.equals(#authentication.name)}"
+                     class="col-md-2 img-square-wrapper img-download">
                     <a data-toggle="collapse" th:href="'#collapse_'+${message.id}" role="button"
                        aria-expanded="false"
                        aria-controls="collapseExample">
@@ -46,6 +47,7 @@
         </div>
     </div>
 </div>
+
 
 <footer th:replace="base :: footer"></footer>
 </body>
