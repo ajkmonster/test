@@ -32,9 +32,6 @@ public class User {
     @Column(name = "username")
     private String username;
 
-    @Column(name = "url")
-    private String url;
-
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     public Set<Message> messages;
 
@@ -52,16 +49,6 @@ public class User {
         this.lastName = lastName;
         this.enabled = enabled;
         this.username = username;
-    }
-    public User(String email, String password, String firstName, String lastName, String username, boolean enabled, String url) {
-        this.email = email;
-        BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-        this.password = passwordEncoder.encode(password);
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.enabled = enabled;
-        this.username = username;
-        this.url = url;
     }
 
 
@@ -120,14 +107,6 @@ public class User {
 
     public void setUsername(String username) {
         this.username = username;
-    }
-
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
     }
 
     public Collection<Role> getRoles() {

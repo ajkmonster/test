@@ -5,6 +5,8 @@ import org.springframework.boot.autoconfigure.security.SecurityProperties;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -47,14 +49,20 @@ public class HomeController {
         model.addAttribute("message", new Message());
         return "messageform";
     }
-    @RequestMapping("/addUser")
+    @GetMapping("/addUser")
     public String newuser(Model model){
         model.addAttribute("user", new User());
         return "userform";
     }
-    @PostMapping("/processuser")
-    public String processuser(@Valid @ModelAttribute User user){
-        userService.saveUser(user);
+    @PostMapping("/process")
+    public String process(@Valid @ModelAttribute User user, BindingResult result, Model model){
+        model.addAttribute("user", user);
+        if (result.hasErrors()){
+            return "userform";
+        }
+        else{
+            userService.saveUser(user);
+        }
         return "redirect:/";
     }
 

@@ -41,7 +41,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/").access("hasAnyAuthority('USER','ADMIN')")
                 .antMatchers("/admin").access("hasAuthority('ADMIN')")
-                .antMatchers("/","/login", "/h2-console/**", "/register", "/*.css", "/*.png", "/*js", "/resources/**").permitAll()
+                .antMatchers("/","/login", "/h2-console/**", "/process", "/*.css", "/*.png", "/*js", "/resources/**","/addUser","/*.java").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -55,4 +55,9 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.headers().frameOptions().disable();
     }
+//    @Override
+//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//        auth.userDetailsService(userDetailsServiceBean())
+//                .passwordEncoder(passwordEncoder());
+//    }
 }

@@ -8,7 +8,7 @@
         <div class="mx-auto">
             <h1 class="display-4">Create an Account</h1>
         </div>
-        <form class="form-signin mx-auto" action="#" th:action="@{/processuser}" th:object="${user}" method="post"
+        <form class="form-signin mx-auto" action="#" th:action="@{/process}" th:object="${user}" method="post"
               enctype="multipart/form-data">
             <input type="hidden" th:field="*{id}"/>
             <div class="form-label-group">
