@@ -34,7 +34,7 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     public Set<Message> messages;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
 
